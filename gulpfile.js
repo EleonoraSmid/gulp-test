@@ -4,6 +4,7 @@ const path = require('path')
 const babel = require('gulp-babel')
 const react = require('gulp-react')
 const eslint = require('gulp-eslint')
+const stripDebug = require('gulp-strip-debug')
 
 gulp.task('default',['lint'], function() {
   // place code for your default task here
@@ -55,4 +56,8 @@ gulp.task('lint', function () {
 	.pipe(eslint.format())
 	.pipe(eslint.failAfterError())
 })
-
+gulp.task('debug', function () {
+	return gulp.src('app.js')
+		.pipe(stripDebug())
+		.pipe(gulp.dest('dist'))
+})
